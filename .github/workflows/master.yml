@@ -1,0 +1,91 @@
+name: Deploy to prod
+on:
+  push:
+    branches:
+      - master
+jobs:
+  bump-version:
+    name: 'Bump Version on master'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout master'
+        uses: 'actions/checkout@v1'
+        with:
+          ref: ${{ github.ref }}
+
+      - name: 'Bump version'
+        id: version-bump
+        uses: 'phips28/gh-action-bump-version@master'
+        with:
+          commit-message: 'CI: bumps version to {{version}} [skip ci]'
+          minor-wording:  'feat,feature'
+          major-wording:  'major,bc'
+          patch-wording:  'patch,fixes,fix'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.15.0]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: 'master'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.15.0
+      - run: npm ci
+      - run: npm run lint
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.15.0]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: 'master'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.15.0
+      - run: npm install
+      - run: npm run lint
+
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.15.0]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: 'master'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.15.0
+      - run: npm install
+      - run: npm run build
+
+  publish-npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: 'master'
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.15.0'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

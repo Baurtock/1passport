@@ -1,0 +1,33 @@
+{
+  "name": "1-passport",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "test": "ts-mocha test/**",
+    "lint": "eslint ./src/** --ext .ts",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Baurtock/1passport.git"
+  },
+  "author": "Baurtock",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Baurtock/1passport/issues"
+  },
+  "homepage": "https://github.com/Baurtock/1passport#readme",
+  "devDependencies": {
+    "@types/chai": "^4.3.4",
+    "@types/expect": "^24.3.0",
+    "@types/mocha": "^10.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/parser": "^5.57.1",
+    "chai": "^4.3.7",
+    "eslint": "^8.37.0",
+    "ts-mocha": "^10.0.0",
+    "typescript": "^5.0.2"
+  }
+}
