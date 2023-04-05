@@ -25,6 +25,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   lint:
+    needs: bump-version
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -42,6 +43,7 @@ jobs:
       - run: npm run lint
 
   test:
+    needs: bump-version
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -59,6 +61,7 @@ jobs:
       - run: npm run lint
 
   build:
+    needs: [bump-version, lint, test]
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -76,6 +79,7 @@ jobs:
       - run: npm run build
 
   publish-npm:
+    needs: [bump-version, lint, test, build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
