@@ -77,6 +77,10 @@ jobs:
           node-version: 18.15.0
       - run: npm install
       - run: npm run build
+      - uses: actions/upload-artifact@master
+        with:
+          name: build
+          path: build/
 
   publish-npm:
     needs: [bump-version, lint, test, build]
@@ -86,7 +90,17 @@ jobs:
         with:
           ref: 'master'
 
-      - uses: actions/setup-node@v3
+      - uses: actions/download-artifact@master
+        with:
+          name: build
+          path: ./build
+
+      - name: Copy package.json into build
+        run: cp package.json build/
+
+      - name: Publish build to NPM
+        working-directory: ./build
+        uses: actions/setup-node@v3
         with:
           node-version: '18.15.0'
           registry-url: 'https://registry.npmjs.org'
