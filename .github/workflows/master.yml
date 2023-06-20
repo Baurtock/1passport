@@ -24,6 +24,25 @@ jobs:
           patch-wording:  'patch,fixes,fix'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  install-dependencies:
+    needs: bump-version
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.15.0]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: 'master'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.15.0
+          cache: 'npm'
+
+      - run: npm ci
+
   lint:
     needs: bump-version
     runs-on: ubuntu-latest
@@ -39,7 +58,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.15.0
-      - run: npm install
+
+      - run: npm ci
       - run: npm run lint
 
   test:
@@ -57,11 +77,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.15.0
-      - run: npm install
+
+      - run: npm ci
       - run: npm run lint
 
   build:
-    needs: [bump-version, lint, test]
+    needs: bump-version
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -76,7 +97,7 @@ jobs:
         with:
           node-version: 18.15.0
 
-      - run: npm install
+      - run: npm ci
       - run: npm run build
 
       - uses: actions/upload-artifact@master
@@ -85,7 +106,7 @@ jobs:
           path: build/
 
   publish-npm:
-    needs: [bump-version, lint, test, build]
+    needs: [ build, lint, test ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
