@@ -1,9 +1,3 @@
-import { OnePassport } from 'core/OnePassport';
-import { Providers } from 'definitions/enums/Providers';
-import { Provider } from 'definitions/interfaces/Provider';
-
-export {
-    OnePassport,
-    Provider,
-    Providers
-};
+export * from 'core/OnePassport';
+export * from 'definitions/enums/Providers';
+export * from 'definitions/interfaces/Provider';
