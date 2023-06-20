@@ -4,7 +4,7 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  lint:
+  install-dependencies:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -17,10 +17,30 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.15.0
-      - run: npm install
+          cache: 'npm'
+
+      - run: npm ci
+
+  lint:
+    needs: install-dependencies
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.15.0]
+    steps:
+      - name: checkout pull request
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.15.0
+
+      - run: npm ci
       - run: npm run lint
 
   test:
+    needs: install-dependencies
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -33,5 +53,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.15.0
-      - run: npm install
+
+      - run: npm ci
       - run: npm run test
