@@ -5,7 +5,7 @@
   "main": "index.ts",
   "type": "module",
   "scripts": {
-    "test": "ts-mocha --require mocha.conf.js test/**/*.ts",
+    "test": "ts-mocha --require mocha.conf.js \"./test/**/*.spec.ts\"",
     "lint": "eslint ./src/** --ext .ts",
     "build": "tsc"
   },
@@ -35,6 +35,7 @@
     "sinon": "^15.0.3",
     "sinon-chai": "^3.7.0",
     "ts-mocha": "^10.0.0",
-    "typescript": "^5.0.3"
+    "typescript": "^5.0.3",
+    "express": "^4.17.2"
   }
 }
