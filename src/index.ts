@@ -1,4 +1,9 @@
-export function index (test: string):boolean {
-    const teste: string = 'test';
-    return test === teste;
-}
+import { OnePassport } from 'core/OnePassport';
+import { Providers } from 'definitions/enums/Providers';
+import { Provider } from 'definitions/interfaces/Provider';
+
+export {
+    OnePassport,
+    Provider,
+    Providers
+};
