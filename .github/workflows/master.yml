@@ -44,7 +44,7 @@ jobs:
       - run: npm ci
 
   lint:
-    needs: bump-version
+    needs: install-dependencies
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -63,7 +63,7 @@ jobs:
       - run: npm run lint
 
   test:
-    needs: bump-version
+    needs: install-dependencies
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -82,7 +82,7 @@ jobs:
       - run: npm run lint
 
   build:
-    needs: bump-version
+    needs: install-dependencies
     runs-on: ubuntu-latest
     strategy:
       matrix:
