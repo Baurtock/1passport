@@ -4,7 +4,7 @@ import { Express } from 'express';
 import { OnePassport } from '../../src/core/OnePassport';
 import { Providers } from '../../src/definitions/enums/Providers';
 import { Provider } from '../../src/definitions/interfaces/Provider';
-import { Google } from '../../src/strategies/Google';
+import { Google } from '../../src/strategies/google/Google';
 
 context('[CORE] 1Passport', () => {
     let app:Express;

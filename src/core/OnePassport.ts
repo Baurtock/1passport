@@ -1,7 +1,7 @@
 import { Express } from 'express';
 import { Provider } from '../definitions/interfaces/Provider';
 import { Providers } from '../definitions/enums/Providers';
-import { Google } from '../strategies/Google';
+import { Google } from '../strategies/google/Google';
 
 export class OnePassport {
     providers: Provider[] = [];
