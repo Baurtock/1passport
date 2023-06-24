@@ -1,3 +1,7 @@
-export * from 'core/OnePassport';
-export * from 'definitions/enums/Providers';
-export * from 'definitions/interfaces/Provider';
+import { OnePassport } from './core/OnePassport';
+import { Providers } from './definitions/enums/Providers';
+
+module.exports = {
+    OnePassport,
+    Providers
+};
