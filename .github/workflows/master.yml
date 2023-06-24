@@ -24,6 +24,7 @@ jobs:
           patch-wording:  'patch,fixes,fix'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   install-dependencies:
     needs: bump-version
     runs-on: ubuntu-latest
@@ -58,6 +59,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.15.0
+          cache: 'npm'
 
       - run: npm ci
       - run: npm run lint
@@ -77,6 +79,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.15.0
+          cache: 'npm'
 
       - run: npm ci
       - run: npm run lint
@@ -96,6 +99,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.15.0
+          cache: 'npm'
 
       - run: npm ci
       - run: npm run build
