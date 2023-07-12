@@ -37,7 +37,7 @@ context('[STRATEGY - Google] LoginHandler', () => {
 
         loginHandler.handle(req, res);
 
-        const expectedUrl = 'http://foo.bar?client_id=foo&redirect_uri=foo.bar//foo/bar/callback&response_type=token&scope=openid%20email%20profile';
+        const expectedUrl = 'http://foo.bar?client_id=foo&redirect_uri=foo.bar/foo/bar/callback&response_type=token&scope=openid%20email%20profile';
         expect(redirectSpy).callCount(1);
         expect(redirectSpy).to.have.been.calledWith(expectedUrl);
     });
@@ -54,7 +54,7 @@ context('[STRATEGY - Google] LoginHandler', () => {
 
         loginHandler.handle(req, res);
 
-        const expectedUrl = 'http://foo.bar?client_id=foo&redirect_uri=foo.bar//foo/bar/callback&response_type=token&scope=openid%20email%20profile';
+        const expectedUrl = 'http://foo.bar?client_id=foo&redirect_uri=foo.bar/foo/bar/callback&response_type=token&scope=openid%20email%20profile';
         expect(jsonSpy).callCount(1);
         expect(jsonSpy).to.have.been.calledWith({ url: expectedUrl });
     });

@@ -21,6 +21,6 @@ export class Google implements Strategy {
     }
 
     private createLoginPath(): void {
-        this.app.get(this.provider.authPath, this.loginHandler.handle);
+        this.app.get(this.provider.authPath, this.loginHandler.handle.bind(this.loginHandler));
     }
 }
