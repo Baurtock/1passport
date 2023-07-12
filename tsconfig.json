@@ -1,11 +1,14 @@
 {
   "noEmit": true,
   "compilerOptions": {
+    "moduleResolution": "node",
     "outDir": "build",
+    "module": "commonjs",
     "noImplicitAny": true,
-    "target": "ESNext",
+    "target": "ES2020",
     "declaration": true,
     "baseUrl": ".",
+    "rootDir": "src/",
     "paths": {
       "*.ts": ["*"]
     }
@@ -15,6 +18,11 @@
   ],
   "include": [
     "src/**/*",
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "test/"
   ],
   "plugins": [
     {

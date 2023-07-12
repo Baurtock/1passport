@@ -22,7 +22,7 @@ export class LoginHandler {
         let url: string = '';
         url = url.concat(this.baseUrl);
         url = url.concat(`?client_id=${this.provider.apiKey}`);
-        url = url.concat(`&redirect_uri=${this.provider.domain}/${this.provider.callbackPath}`);
+        url = url.concat(`&redirect_uri=${this.provider.domain}${this.provider.callbackPath}`);
         url = url.concat('&response_type=token');
         url = url.concat('&scope=openid%20email%20profile');
 
