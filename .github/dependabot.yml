@@ -4,13 +4,13 @@ updates:
   directory: "/"
   schedule:
     interval: daily
-    time: "12:10"
+    time: "12:30"
   open-pull-requests-limit: 1
   assignees:
     - baurtock
   reviewers:
     - baurtock
-  group:
+  groups:
     all:
       patterns:
         - "*"
